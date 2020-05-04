@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+		<script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+		<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+		<title>Idea processing</title>
+	</head>
+	<body>
+		<div id="layout">
+			<div id="menu">
+				<div class="pure-menu">
+					<a href="" class="pure-menu-heading">Idea analyzer</a>
+					<ul class="pure-menu-list">
+						<li class="pure-menu-item">
+							<a href="/" class="pure-menu-link">Ideas</a>
+						</li>
+						<li class="pure-menu-item">
+							<a href="/insights" class="pure-menu-link">Insights</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div id="main">
+				{% block content %}{% endblock %}
+			</div>
+		</div>
+	</body>
+</html>

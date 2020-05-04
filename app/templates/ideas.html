@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+	<script src="{{ url_for('static', filename='ideas.js') }}"></script>
+	<h1>Ideas</h1>
+	<form action="/" method="get" class="pure-form pure-form-stacked">
+		<input class="pure-input-1 pure-input-rounded" id="search" name="search" type="text" placeholder="Search">
+	</form>
+	<div class="cards">
+		{% for idea_id,idea in ideas.iterrows() %}
+			<div 
+				class="idea-card"
+				href="/ideas/{{idea['id']}}"
+			>
+				<h3>{{idea['title']}}</h3>
+				<div class="metadata">
+					<div class="votes">
+						<span class="up">👍 {{idea['upvotes_count']}}</span>
+						<span class="down">👎 {{idea['downvotes_count']}}</span>
+					</div>
+					<div class="react-topic-control" data-topics="{{idea['topics']}}" data-idea-id="{{idea_id}}"></div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

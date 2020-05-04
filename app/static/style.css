@@ -1,0 +1,102 @@
+html, button, input, select, textarea,
+.pure-g [class *= "pure-u"] {
+  font-family: 'Raleway', sans-serif;
+}
+
+body {
+	background-color: #fafafa;
+}
+
+#layout {
+	padding-left: 150px;
+	left: 0;
+	position: relative;
+}
+
+#menu {
+	margin-left: -150px;
+	width: 150px;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	background: #191818;
+	overflow-y: auto;
+}
+
+#menu .pure-menu-heading {
+	color: white;
+	background: #1f8dd6;
+}
+
+#menu .pure-menu-link {
+	color: #ddd;
+}
+
+#main {
+	margin: 1em;
+}
+
+.idea-card {
+	display: block;
+	text-decoration: none;
+	box-sizing: border-box;
+	margin: 1em 0;
+	padding: 1em 1em;
+	border: 1px solid #e6e6e6;
+	border-radius: 4px;
+	background-color: white;
+	color: #444;
+	transition: 200ms;
+}
+
+.idea-card h3 {
+	font-size: 15px;
+	margin: 0;
+	margin-bottom: 1em;
+}
+
+.idea-card .up {
+	display: inline-block;
+}
+
+.idea-card .metadata {
+	display: flex;
+	justify-content: space-between;
+}
+
+.idea-card .topics {
+	font-size: 12px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.idea-card .topic {
+	padding: 0.2em 0.4em;
+	background-color: #efefef;
+	border-radius: 0.2em;
+	margin: 0.2em;
+	transition: 200ms;
+	cursor: pointer;
+}
+
+.idea-card .topic:hover {
+	background-color: #dfdfdf;
+}
+
+.dropdown {
+  margin: 0.5em 0 0;
+  padding: 0;
+  position: absolute
+}
+
+.dropdown > li {
+  margin: 0;
+  padding: 0.5em;
+  background-color: white;
+  list-style: none;
+  cursor: pointer;
+}
+
+.dropdown > li:hover {
+	background-color: #d6d6d6;
+}
