@@ -20,9 +20,13 @@ X = [t + ' ' + b for t, b in zip(ideas_with_topic['title'], ideas_with_topic['bo
 y = [[int(t in idea_topics) for t in topics] for idea_topics in ideas_with_topic['topics']]  # binarizing output
 
 # model
-vectorizer = TfidfVectorizer(ngram_range=(1, 2), max_df=0.8, max_features=500)
-classifier = RandomForestClassifier(n_estimators=10, max_depth=6,
-                                    class_weight='balanced', random_state=2020)
+vectorizer = TfidfVectorizer(ngram_range=(1, 2),
+                             max_df=0.8,
+                             max_features=1000)
+classifier = RandomForestClassifier(n_estimators=100,
+                                    max_depth=5,
+                                    class_weight='balanced',
+                                    random_state=2020)
 one_vs_rest = OneVsRestClassifier(classifier)
 topic_predictor = Pipeline([('vectorizer', vectorizer), ('one_vs_rest', one_vs_rest)])
 topic_predictor.fit(X, y)
@@ -30,6 +34,7 @@ topic_predictor.fit(X, y)
 if __name__ == "__main__":
     # train & test
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=2020)
+
     topic_predictor.fit(X_train, y_train)
     y_test_pred = topic_predictor.predict(X_test)
     print(classification_report(y_test, y_test_pred, target_names=topics))
