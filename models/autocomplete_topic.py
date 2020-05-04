@@ -12,12 +12,11 @@ from sklearn.pipeline import Pipeline
 ideas = pd.read_csv("data/leuven_ideas.csv", dtype={'topics': str})
 ideas_with_topic = ideas[~ideas['topics'].isna()]  # all ideas that have at least one encoded topic
 ideas_with_multiple_topics = ideas_with_topic[[len(t.split(',')) > 1 for t in ideas_with_topic['topics']]]
-ideas_with_topic = ideas_with_multiple_topics  # !!
 
-topics = pd.DataFrame(ideas_with_topic.topics.str.split(',').tolist()).stack().unique()
+topics = pd.DataFrame(ideas_with_multiple_topics.topics.str.split(',').tolist()).stack().unique()
 
-X = [t + ' ' + b for t, b in zip(ideas_with_topic['title'], ideas_with_topic['body'])]
-y = [[int(t in idea_topics) for t in topics] for idea_topics in ideas_with_topic['topics']]  # binarizing output
+X = [t + ' ' + b for t, b in zip(ideas_with_multiple_topics['title'], ideas_with_multiple_topics['body'])]
+y = [[int(t in idea_topics) for t in topics] for idea_topics in ideas_with_multiple_topics['topics']]  # binarizing output
 
 # model
 vectorizer = TfidfVectorizer(ngram_range=(1, 2),
@@ -27,7 +26,7 @@ classifier = RandomForestClassifier(n_estimators=100,
                                     max_depth=5,
                                     class_weight='balanced',
                                     random_state=2020)
-one_vs_rest = OneVsRestClassifier(classifier)
+one_vs_rest = OneVsRestClassifier(classifier, n_jobs=8)
 topic_predictor = Pipeline([('vectorizer', vectorizer), ('one_vs_rest', one_vs_rest)])
 topic_predictor.fit(X, y)
 
